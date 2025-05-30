@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Assistant Agency</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Moul&family=Moulpali&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/17284/17284250.png">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4d44db;
+            --accent-color: #ff6584;
+            --dark-color: #2d2d3a;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --text-light: #777;
+            --transition: all 0.3s ease;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Kantumruy Pro', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #f5f5ff;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Moul', serif;
+            font-weight: normal;
+            line-height: 1.2;
+        }
+
+        .model-font {
+            font-family: 'Moulpali', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            position: relative;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            max-width: 600px;
+        }
+
+        .btn {
+            display: block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: fit-content;
+            float: left;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+            font-size: 30px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: #f9f9ff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .service-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .service-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            margin: 0 15px;
+            flex: 0 0 100%;
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-role {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .slider-nav button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .slider-nav button:hover {
+            background: var(--secondary-color);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .cta .btn:hover {
+            background-color: var(--light-color);
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-column p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 5px;
+        }
+
+        .language-toggle span {
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .language-toggle span.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Language Content */
+        .lang-en, .lang-kh {
+            display: none;
+        }
+
+        .lang-en.active, .lang-kh.active {
+            display: block;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                margin-bottom: 50px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+
+            .section-title h2 {
+                font-size: 26px;
+            }
+
+            .feature-card, .service-card {
+                padding: 20px;
+            }
+        }
+
+        /* Khmer Language Styles */
+        body.khmer {
+            font-family: 'Kantumruy Pro', sans-serif;
+        }
+
+        body.khmer h1, 
+        body.khmer h2, 
+        body.khmer h3, 
+        body.khmer h4 {
+            font-family: 'Moul', sans-serif;
+        }
+
+        body.khmer .model-font {
+            font-family: 'Moulpali', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/17284/17284250.png" alt="Virtual Assistant Agency Logo">
+                <span class="logo-text">VAssistant</span>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li>
+                        <a href="#home" class="lang-en active">Home</a>
+                        <a href="#home" class="lang-kh">ទំព័រដើម</a>
+                    </li>
+                    <li>
+                        <a href="#features" class="lang-en active">Features</a>
+                        <a href="#features" class="lang-kh">លក្ខណៈពិសេស</a>
+                    </li>
+                    <li>
+                        <a href="#services" class="lang-en active">Services</a>
+                        <a href="#services" class="lang-kh">សេវាកម្ម</a>
+                    </li>
+                    <li>
+                        <a href="#testimonials" class="lang-en active">Testimonials</a>
+                        <a href="#testimonials" class="lang-kh">មតិអ្នកប្រើប្រាស់</a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="lang-en active">Contact</a>
+                        <a href="#contact" class="lang-kh">ទំនាក់ទំនង</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <h1 class="lang-en active">Your <span>Virtual Assistant</span> Solution</h1>
+                    <h1 class="lang-kh">ជំនួយការបំរើ <span>សម្រាប់អ្នក</span></h1>
+                    <p class="lang-en active">We provide top-notch virtual assistant services to help you focus on what really matters. Our team of professionals is ready to handle your tasks efficiently.</p>
+                    <p class="lang-kh">យើងផ្តល់សេវាកម្មជំនួយការបំរើដ៏ល្អឥតខ្ចោះដើម្បីជួយអ្នកផ្តោតលើអ្វីដែលសំខាន់ពិតប្រាកដ។ ក្រុមអ្នកជំនាញរបស់យើងត្រៀមខ្លួនជាស្រេចដើម្បីគ្រប់គ្រងកិច្ចការរបស់អ្នកប្រកបដោយប្រសិទ្ធភាព។</p>
+                    <div class="btn-group">
+                        <a href="#contact" class="btn lang-en active">Get Started</a>
+                        <a href="#contact" class="btn lang-kh">ចាប់ផ្តើម</a>
+                        <a href="#services" class="btn btn-outline lang-en active">Our Services</a>
+                        <a href="#services" class="btn btn-outline lang-kh">សេវាកម្មរបស់យើង</a>
+                    </div>
+                </div>
+                <div class="hero-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Virtual Assistant Working">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="lang-en active">Why Choose Us</h2>
+                <h2 class="lang-kh">ហេតុអ្វីជ្រើសរើសយើង</h2>
+                <p class="lang-en active">We offer the best virtual assistant services with these amazing features</p>
+                <p class="lang-kh">យើងផ្តល់សេវាកម្មជំនួយការបំរើល្អបំផុតជាមួយនឹងលក្ខណៈពិសេសអស្ចារ្យទាំងនេះ</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="lang-en active">24/7 Availability</h3>
+                    <h3 class="lang-kh">អាចប្រើប្រាស់បាន ២៤/៧</h3>
+                    <p class="lang-en active">Our virtual assistants are available round the clock to support your needs.</p>
+                    <p class="lang-kh">ជំនួយការបំរើរបស់យើងអាចប្រើប្រាស់បានគ្រប់ពេលវេលាដើម្បីគាំទ្រតម្រូវការរបស់អ្នក។</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="lang-en active">Secure & Confidential</h3>
+                    <h3 class="lang-kh">សុវត្ថិភាព និងឯកជន</h3>
+                    <p class="lang-en active">Your data and information are protected with our strict security measures.</p>
+                    <p class="lang-kh">ទិន្នន័យនិងព័ត៌មានរបស់អ្នកត្រូវបានការពារដោយវិធានការសុវត្ថិភាពតឹងរឹងរបស់យើង។</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="lang-en active">Dedicated Support</h3>
+                    <h3 class="lang-kh">ជំនួយឧទ្ទិស</h3>
+                    <p class="lang-en active">Get personalized assistance from our team of experienced professionals.</p>
+                    <p class="lang-kh">ទទួលបានជំនួយផ្ទាល់ខ្លួនពីក្រុមអ្នកជំនាញដែលមានបទពិសោធន៍របស់យើង។</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="lang-en active">Our Services</h2>
+                <h2 class="lang-kh">សេវាកម្មរបស់យើង</h2>
+                <p class="lang-en active">Explore our range of professional virtual assistant services</p>
+                <p class="lang-kh">ស្វែងយល់ពីជួរសេវាកម្មជំនួយការបំរើជំនាញរបស់យើង</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Administrative Support">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="lang-en active">Administrative Support</h3>
+                        <h3 class="lang-kh">ជំនួយរដ្ឋបាល</h3>
+                        <p class="lang-en active">Email management, calendar scheduling, data entry, and other administrative tasks.</p>
+                        <p class="lang-kh">ការគ្រប់គ្រងអ៊ីមែល ការកំណត់កាលវិភាគ ការបញ្ចូលទិន្នន័យ និងកិច្ចការរដ្ឋបាលផ្សេងទៀត។</p>
+                        <div class="service-price">$15/hour</div>
+                        <a href="#contact" class="btn lang-en active">Get Started</a>
+                        <a href="#contact" class="btn lang-kh">ចាប់ផ្តើម</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Social Media Management">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="lang-en active">Social Media Management</h3>
+                        <h3 class="lang-kh">ការគ្រប់គ្រងបណ្តាញសង្គម</h3>
+                        <p class="lang-en active">Content creation, scheduling, engagement, and analytics for your social platforms.</p>
+                        <p class="lang-kh">ការបង្កើតមាតិកា ការកំណត់កាលវិភាគ ការចូលរួម និងការវិភាគសម្រាប់វេទិកាសង្គមរបស់អ្នក។</p>
+                        <div class="service-price">$20/hour</div>
+                        <a href="#contact" class="btn lang-en active">Get Started</a>
+                        <a href="#contact" class="btn lang-kh">ចាប់ផ្តើម</a>
+                    </div>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Customer Support">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="lang-en active">Customer Support</h3>
+                        <h3 class="lang-kh">ជំនួយអតិថិជន</h3>
+                        <p class="lang-en active">Handle customer inquiries, complaints, and provide excellent support services.</p>
+                        <p class="lang-kh">ដោះស្រាយសំណួរអតិថិជន ពាក្យបណ្តឹង និងផ្តល់សេវាកម្មគាំទ្រដ៏ល្អឥតខ្ចោះ។</p>
+                        <div class="service-price">$12/hour</div>
+                        <a href="#contact" class="btn lang-en active">Get Started</a>
+                        <a href="#contact" class="btn lang-kh">ចாஔផ្តើម</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="lang-en active">What Our Clients Say</h2>
+                <h2 class="lang-kh">អ្វីដែលអតិថិជនរបស់យើងនិយាយ</h2>
+                <p class="lang-en active">Hear from our satisfied clients about their experience with our services</p>
+                <p class="lang-kh">ស្តាប់ពីអតិថិជនពេញចិត្តរបស់យើងអំពីបទពិសោធន៍របស់ពួកគេជាមួយសេវាកម្មរបស់យើង</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonials-container">
+                    <div class="testimonial-card fade-in">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson">
+                        </div>
+                        <p class="testimonial-text lang-en active">"The virtual assistant service has been a game-changer for my business. I've saved so much time and increased productivity!"</p>
+                        <p class="testimonial-text lang-kh">"សេវាកម្មជំនួយការបំរើបានផ្លាស់ប្តូរល្បែងសម្រាប់អាជីវកម្មរបស់ខ្ញុំ។ ខ្ញុំបានសន្សំពេលវេលាច្រើន និងបង្កើនផលិតភាព!"</p>
+                        <div class="testimonial-author">Sarah Johnson</div>
+                        <div class="testimonial-role lang-en active">Small Business Owner</div>
+                        <div class="testimonial-role lang-kh">ម្ចាស់អាជីវកម្មតូច</div>
+                    </div>
+                    <div class="testimonial-card fade-in">
+                        <div class="testimonial-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael Chen">
+                        </div>
+                        <p class="testimonial-text lang-en active">"Professional, reliable, and efficient. My virtual assistant handles all my scheduling and email management perfectly."</p>
+                        <p class="testimonial-text lang-kh">"ជំនាញ គួរឱ្យទុកចិត្ត និងមានប្រសិទ្ធភាព។ ជំនួយការបំរើរបស់ខ្ញុំគ្រប់គ្រងការកំណត់កាលវិភាគនិងការគ្រប់គ្រងអ៊ីមែលរបស់ខ្ញុំបានយ៉ាងល្អឥតខ្ចោះ។"</p>
+                        <div class="testimonial-author">Michael Chen</div>
+                        <div class="testimonial-role lang-en active">Marketing Director</div>
+                        <div class="testimonial-role lang-kh">នាយកទីផ្សារ</div>
+                    </div>
+                </div>
+                <div class="slider-nav">
+                    <button class="prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2 class="lang-en active">Ready to Boost Your Productivity?</h2>
+                <h2 class="lang-kh">ត្រៀមបង្កើនផលិតភាពរបស់អ្នកហើយឬនៅ?</h2>
+                <p class="lang-en active">Get started with our virtual assistant services today and focus on growing your business.</p>
+                <p class="lang-kh">ចាប់ផ្តើមជាមួយសេវាកម្មជំនួយការបំរើរបស់យើងថ្ងៃនេះ និងផ្តោតលើការពង្រីកអាជីវកម្មរបស់អ្នក។</p>
+                <a href="#contact" class="btn lang-en active">Contact Us Now</a>
+                <a href="#contact" class="btn lang-kh">ទាក់ទងយើងឥឡូវនេះ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="logo-text">VAssistant</h3>
+                    <p class="lang-en active">Providing top-quality virtual assistant services to help businesses grow and individuals achieve more.</p>
+                    <p class="lang-kh">ផ្តល់សេវាកម្មជំនួយការបំរើគុណភាពខ្ពស់ដើម្បីជួយអាជីវកម្មរីកចម្រើននិងបុគ្គលសម្រេចបានច្រើនជាងនេះ។</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="lang-en active">Quick Links</h3>
+                    <h3 class="lang-kh">តំណភ្ជាប់រហ័ស</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#home" class="lang-en active">Home</a>
+                            <a href="#home" class="lang-kh">ទំព័រដើម</a>
+                        </li>
+                        <li>
+                            <a href="#features" class="lang-en active">Features</a>
+                            <a href="#features" class="lang-kh">លក្ខណៈពិសេស</a>
+                        </li>
+                        <li>
+                            <a href="#services" class="lang-en active">Services</a>
+                            <a href="#services" class="lang-kh">សេវាកម្ម</a>
+                        </li>
+                        <li>
+                            <a href="#testimonials" class="lang-en active">Testimonials</a>
+                            <a href="#testimonials" class="lang-kh">មតិអ្នកប្រើប្រាស់</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="lang-en active">Contact</a>
+                            <a href="#contact" class="lang-kh">ទំនាក់ទំនង</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="lang-en active">Contact Us</h3>
+                    <h3 class="lang-kh">ទំនាក់ទំនងយើង</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Phnom Penh, Cambodia</p>
+                    <p><i class="fas fa-phone"></i> +855 12 345 678</p>
+                    <p><i class="fas fa-envelope"></i> info@vassistant.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="lang-en active">2025 - All rights reserved. Provided by Mr. Phekdey PHORN</p>
+                <p class="lang-kh">២០២៥ - រក្សាសិទ្ធិទាំងអស់។ ផ្តល់ដោយលោក ផន ភក្តី</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <span class="lang-toggle-en active">EN</span>
+        <span class="lang-toggle-kh">KH</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Language Toggle
+        const langToggleEn = document.querySelector('.lang-toggle-en');
+        const langToggleKh = document.querySelector('.lang-toggle-kh');
+        
+        function switchLanguage(lang) {
+            const isEnglish = lang === 'en';
+            document.querySelectorAll('.lang-en').forEach(el => {
+                el.classList.toggle('active', isEnglish);
+            });
+            document.querySelectorAll('.lang-kh').forEach(el => {
+                el.classList.toggle('active', !isEnglish);
+            });
+            langToggleEn.classList.toggle('active', isEnglish);
+            langToggleKh.classList.toggle('active', !isEnglish);
+            document.body.classList.toggle('khmer', !isEnglish);
+        }
+
+        langToggleEn.addEventListener('click', () => switchLanguage('en'));
+        langToggleKh.addEventListener('click', () => switchLanguage('kh'));
+
+        // Testimonials Slider
+        const testimonialsContainer = document.querySelector('.testimonials-container');
+        const prevBtn = document.querySelector('.slider-nav .prev');
+        const nextBtn = document.querySelector('.slider-nav .next');
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.testimonial-card').length;
+
+        function updateSlider() {
+            testimonialsContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides) % slides;
+            updateSlider();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides;
+            updateSlider();
+        });
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides;
+            updateSlider();
+        }, 5000);
+
+        // Animation on Scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        // Initial check
+        fadeInOnScroll();
+
+        // Check on scroll
+        window.addEventListener('scroll', fadeInOnScroll);
+    </script>
+</body>
+</html>
